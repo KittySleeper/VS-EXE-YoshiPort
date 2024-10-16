@@ -1,0 +1,14 @@
+{
+	"songs": [
+		{
+			"bpm": 150,
+			"difficulties": [
+				"Hard"
+			],
+			"displayName": null,
+			"char": "sonicexe",
+			"name": "too-slow",
+			"color": "#FFFFFF"
+		}
+	]
+}
