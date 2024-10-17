@@ -13,6 +13,13 @@
 			"end_cutscene": null,
 			"cutscene": null,
 			"name": "malediction"
+		},
+		{
+			"scripts": [],
+			"difficulties": [],
+			"end_cutscene": null,
+			"cutscene": null,
+			"name": "you-cant-run"
 		}
 	]
 }

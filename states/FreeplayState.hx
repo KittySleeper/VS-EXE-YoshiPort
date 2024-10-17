@@ -2,12 +2,14 @@ import Highscore;
 import LoadingState;
 import flixel.math.FlxMath;
 import flixel.addons.display.FlxBackdrop;
+import flixel.addons.transition.FlxTransitionableState;
 
 var inSongSelection = false;
 
 var curSelected = 0;
 var songSelected = 0;
 var songsLength = 0;
+var songSelectedStr = "Too-Slow";
 
 var characters = ["sonic.exe", "curse", "coldsteel"];
 var charactersUnlocked = ["sonic.exe", "curse", "coldsteel"];
@@ -78,8 +80,10 @@ function create() {
 }
 
 function update(elapsed) {
+    songSelectedStr = songs.get(characters[curSelected])[songSelected];
+
     scoreText.visible = inSongSelection;
-    scoreText.text = "Score " + Highscore.getModScore(mod, songsTexts[songSelected].text, "hard");
+    scoreText.text = "Score " + Highscore.getModScore(mod, songSelectedStr, "hard");
 
     if (controls.UP_P) {
         if (inSongSelection)
@@ -97,10 +101,15 @@ function update(elapsed) {
 
     if (controls.ACCEPT) {
         if (inSongSelection) {
-            FlxG.camera.fade(0xFFffffff, 0.4);
+            FlxTransitionableState.skipNextTransIn = true;
+            FlxTransitionableState.skipNextTransOut = true;
 
-            CoolUtil.loadSong(mod, songsTexts[songSelected].text, "hard");
-            LoadingState.loadAndSwitchState(new PlayState());
+            FlxG.camera.fade(0xFFffffff, 0.8);
+
+            new FlxTimer().start(1, function(tmr) {
+                CoolUtil.loadSong(mod, songSelectedStr, "hard");
+                LoadingState.loadAndSwitchState(new PlayState());    
+            });
         } else {
             changeSongSelection(0);
             inSongSelection = true;
@@ -154,7 +163,7 @@ function changeSelection(amt) {
     for (song in songs.get(characters[curSelected])) {
         songIndex++;
 
-        var text = new FlxText(350, (songIndex * 65) + 330, FlxG.width, song, 45);
+        var text = new FlxText(350, (songIndex * 65) + 330, FlxG.width, StringTools.replace(song, "-", " "), 45);
         text.scrollFactor.set();
         text.alignment = "center";
         songsTexts.push(text);

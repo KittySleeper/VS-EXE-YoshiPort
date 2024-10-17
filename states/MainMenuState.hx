@@ -32,8 +32,8 @@ function create() {
 		menuItem.animation.addByPrefix('idle', optionShit[i] + " basic", 24);
 		menuItem.animation.play('idle');
 		menuItem.ID = i;
-		add(menuItem);
 		menuItems.push(menuItem);
+		add(menuItem);
 
 		var scr:Float = (optionShit.length - 4) * 0.135;
 		menuItem.scrollFactor.set(0, scr);
@@ -41,7 +41,7 @@ function create() {
 		xval = xval + 70;
 	}
 
-    FlxG.camera.follow(camFollow, null, 1);
+    FlxG.camera.follow(camFollow, null, 0.85);
 
 	changeSelection(0);
 }

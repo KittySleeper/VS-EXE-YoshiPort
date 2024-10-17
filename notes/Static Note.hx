@@ -8,4 +8,5 @@ function create() {
     note.animation.play("note");
     note.setGraphicSize(Std.int(note.width * 0.7));
     note.offset.x += 30;
+    note.splashColor = 0xFFFF0101;
 }
