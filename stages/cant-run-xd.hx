@@ -2,6 +2,8 @@ var greenhill;
 var sonic:Character = null;
 var bfp;
 
+var scanline = new CustomShader(Paths.shader("scanline"));
+
 var stage:Stage = null;
 
 function create() {
@@ -22,6 +24,8 @@ function create() {
 	bfp.flipX = false;
 	boyfriends.push(bfp);
 	add(bfp);
+
+	camHUD.addShader(scanline);
 }
 
 function update(elapsed) {
@@ -29,6 +33,8 @@ function update(elapsed) {
 
 	if (greenhill.visible)
 		camFollow.setPosition(430, 285);
+
+	camHUD.filtersEnabled = greenhill.visible;
 }
 
 function beatHit(curBeat) {

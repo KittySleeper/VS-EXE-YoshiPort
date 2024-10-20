@@ -13,7 +13,7 @@ var ratingStuff:Array<Dynamic> = [
 	['Perfect!!', 1] // The value on this one isn't used actually, since Perfect is always "1"
 ];
 
-function createPost() {
+function createPost() {	
 	scoreTxt.y = healthBarBG.y + 36;
 	scoreTxt.size = 20;
 	scoreTxt.borderSize = 1.25;

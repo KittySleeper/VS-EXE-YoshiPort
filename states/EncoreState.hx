@@ -1,3 +1,4 @@
+import Highscore;
 import LoadingState;
 import flixel.math.FlxMath;
 
@@ -15,7 +16,7 @@ var songText;
 
 var curSelected = 0;
 
-function create() {
+function create() {    
     var bg = new FlxSprite().loadGraphic(Paths.image("menus/freeplay/backgroundlool"));
     bg.setGraphicSize(1280, 720);
     bg.scrollFactor.set();
@@ -36,7 +37,7 @@ function create() {
         add(portrait);
     }
 
-    songText = new FlxText(0, 635, FlxG.width, "too-stupid", 35);
+    songText = new FlxText(0, 635, FlxG.width, "too-stupid\nSCORE you suck", 35);
     songText.alignment = "center";
     songText.scrollFactor.set();
     add(songText);
@@ -75,5 +76,5 @@ function changeItem(amt) {
     if (curSelected >= songsLength)
         curSelected = songsLength;
 
-    songText.text = songs.get(fuckyous[curSelected]);
+    songText.text = songs.get(fuckyous[curSelected]) + "\nSCORE " + Highscore.getModScore(mod, songs.get(fuckyous[curSelected]), "encore");
 }

@@ -11,11 +11,12 @@ var songSelected = 0;
 var songsLength = 0;
 var songSelectedStr = "Too-Slow";
 
-var characters = ["sonic.exe", "curse", "coldsteel"];
-var charactersUnlocked = ["sonic.exe", "curse", "coldsteel"];
+var characters = ["sonic.exe", "curse", "starved", "coldsteel"];
+var charactersUnlocked = ["sonic.exe", "curse", "starved", "coldsteel"];
 var songs = [
     "sonic.exe" => ["Too-Slow", "You-Cant-Run", "Triple-Trouble"],
     "curse" => ["Malediction", "Test"],
+    "starved" => ["Prey", "Fight-Or-Flight"],
     "coldsteel" => ["Personel"]
 ];
 
