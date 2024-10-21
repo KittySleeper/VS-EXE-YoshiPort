@@ -24,8 +24,6 @@ function create() {
 	bfp.flipX = false;
 	boyfriends.push(bfp);
 	add(bfp);
-
-	camHUD.addShader(scanline);
 }
 
 function update(elapsed) {
@@ -33,8 +31,6 @@ function update(elapsed) {
 
 	if (greenhill.visible)
 		camFollow.setPosition(430, 285);
-
-	camHUD.filtersEnabled = greenhill.visible;
 }
 
 function beatHit(curBeat) {
@@ -47,16 +43,23 @@ function onPsychEvent(event:String, v1:Dynamic, v2:Dynamic) {
 			for (spr in [greenhill, sonic, bfp])
 				spr.visible = v1 == "1";
 
+			popupArrows = false;
+
 			for (strum in cpuStrums)
 				strum.kill();
 			for (strum in playerStrums)
 				strum.kill();
-			
+
 			cpuStrums.clear();
 			playerStrums.clear();
 
 			FlxG.state.generateStaticArrows(0);
 			FlxG.state.generateStaticArrows(1);
+
+			if (v1 == "1")
+				camHUD.addShader(scanline);
+			else
+				camHUD.removeShader(scanline);
     }
 }
 
