@@ -14,23 +14,29 @@ function create() {
     greenhill.visible = false;
     add(greenhill);
 
-	sonic = new Character(-45, 120, mod + ":pixelrunsonic");
+	sonic = new Character(-45, 120, mod + if (FlxG.state.storyDifficulty == "encore") ":xenopickelencore" else ":pixelrunsonic");
 	sonic.visible = false;
 	dads.push(sonic);
 	add(sonic);
 
-	bfp = new Character(685, 50, mod + ":bfpickel");
+	bfp = new Boyfriend(685, 50, mod + if (FlxG.state.storyDifficulty == "encore") ":bfpickelencore" else ":bfpickel");
 	bfp.visible = false;
 	bfp.flipX = false;
 	boyfriends.push(bfp);
 	add(bfp);
+
+	if (FlxG.state.storyDifficulty == "encore") {
+		sonic.x += 550;
+		bfp.x -= 550;
+		bfp.flipX = true;
+	}
 }
 
 function update(elapsed) {
 	stage.update(elapsed);
 
 	if (greenhill.visible)
-		camFollow.setPosition(430, 285);
+		camFollow.setPosition(430, 210);
 }
 
 function beatHit(curBeat) {

@@ -17,7 +17,7 @@ function create() {
 function createPost() {
     floor = new FlxTiledSprite(Paths.image('stages/starved/pixel/stardustFloor'), 4608, 2832, true, true);
     floor.screenCenter();
-    floor.y -= 410;
+    floor.y -= 530;
 	add(floor);
 
 	for (obj in [bg, floor])

@@ -23,7 +23,7 @@ function create() {
 	FlxTween.tween(pauseTop, {x: 0}, 0.2, {ease: FlxEase.quadOut});
 	add(pauseTop);
 
-	var pauseBottom = new FlxSprite(900, FlxG.height * 0.05).loadGraphic(Paths.image("pauseStuff/bottomPanel"));
+	var pauseBottom = new FlxSprite(900, FlxG.height * 0.05 + if (FlxG.scaleMode.isWidescreen) 0 else 220).loadGraphic(Paths.image("pauseStuff/bottomPanel"));
 	pauseBottom.cameras = [pauseCam];
 	FlxTween.tween(pauseBottom, {x: 600}, 0.2, {ease: FlxEase.quadOut});
 	add(pauseBottom);
@@ -54,7 +54,7 @@ function create() {
 	icon2.cameras = [pauseCam];
 	add(icon2);
 
-    mhhxenoharder = new FlxSprite(905, 465).loadGraphic(Paths.image("pauseStuff/graybut"));
+    mhhxenoharder = new FlxSprite(905, 465 + if (FlxG.scaleMode.isWidescreen) 0 else 220).loadGraphic(Paths.image("pauseStuff/graybut"));
     mhhxenoharder.cameras = [pauseCam];
     add(mhhxenoharder);
 
@@ -63,12 +63,12 @@ function create() {
 	for (item in menuItems) {
 		itemIndex++;
 
-		var sprBG = new FlxSprite(2100, 450 + (90 * itemIndex)).loadGraphic(Paths.image("pauseStuff/blackbut"));
+		var sprBG = new FlxSprite(2100, 450 + (90 * itemIndex) + if (FlxG.scaleMode.isWidescreen) 0 else 220).loadGraphic(Paths.image("pauseStuff/blackbut"));
 		sprBG.cameras = [pauseCam];
         menuSprites.push(sprBG);
 		add(sprBG);
 
-		var spr = new FlxSprite(2000, 450 + (90 * itemIndex)).loadGraphic(Paths.image("pauseStuff/" + item));
+		var spr = new FlxSprite(2000, 450 + (90 * itemIndex) + if (FlxG.scaleMode.isWidescreen) 0 else 220).loadGraphic(Paths.image("pauseStuff/" + item));
 		spr.cameras = [pauseCam];
 		add(spr);
 

@@ -11,11 +11,13 @@ var songSelected = 0;
 var songsLength = 0;
 var songSelectedStr = "Too-Slow";
 
-var characters = ["sonic.exe", "curse", "starved", "coldsteel"];
-var charactersUnlocked = ["sonic.exe", "curse", "starved", "coldsteel"];
+var characters = ["curse", "fatalerror", "b4cksl4sh", "starved", "coldsteel"];
+var charactersUnlocked = ["curse", "fatalerror", "b4cksl4sh", "starved"];
+var songsUnlocked = ["malediction", "fatality", "b4cksl4sh", "prey", "fight-or-flight"];
 var songs = [
-    "sonic.exe" => ["Too-Slow", "You-Cant-Run", "Triple-Trouble"],
     "curse" => ["Malediction", "Test"],
+    "fatalerror" => ["Fatality"],
+    "b4cksl4sh" => ["B4cksl4sh"],
     "starved" => ["Prey", "Fight-Or-Flight"],
     "coldsteel" => ["Personel"]
 ];
@@ -30,6 +32,20 @@ var characterPortraits = [];
 var stupidTween;
 
 function create() {
+    if (FlxG.save.data.charsUnlocked == null) 
+        FlxG.save.data.charsUnlocked = [];
+
+    for (char in FlxG.save.data.charsUnlocked)
+        if (!charactersUnlocked.contains(char))
+            charactersUnlocked.push(char);
+
+    for (char in songs.keys()) {
+        for (song in songs.get(char)) {
+            if (Highscore.getModScore(mod, song, "hard") > 0 && charactersUnlocked.contains(char.toLowerCase()) && !songsUnlocked.contains(song.toLowerCase()))
+                songsUnlocked.push(song.toLowerCase());
+        }
+    }
+
     var bg = new FlxSprite().loadGraphic(Paths.image('menus/freeplay/backgroundlool'));
     bg.screenCenter();
     bg.setGraphicSize(1280, 720);
@@ -48,10 +64,22 @@ function create() {
     var charIndex = -1;
 
     for (char in characters) {
-        if (charactersUnlocked.contains(char)) {
-            charIndex++;
+        charIndex++;
 
+        if (charactersUnlocked.contains(char)) {
             var portrait = new FlxSprite(-330, (450 * charIndex) + 650).loadGraphic(Paths.image("menus/freeplay/fpstuff/" + char));
+            portrait.setGraphicSize(Std.int(portrait.width / 1.7));
+            portrait.ID = charIndex;
+            characterPortraits.push(portrait);
+            add(portrait);
+
+            var box = new FlxSprite(-330, (450 * charIndex) + 650).loadGraphic(Paths.image("menus/freeplay/FreeBox"));
+            box.setGraphicSize(Std.int(box.width / 1.7));
+            box.ID = charIndex;
+            stupidBoxs.push(box);
+            add(box);
+        } else {
+            var portrait = new FlxSprite(-330, (450 * charIndex) + 650).loadGraphic(Paths.image("menus/freeplay/fpstuff/locked"));
             portrait.setGraphicSize(Std.int(portrait.width / 1.7));
             portrait.ID = charIndex;
             characterPortraits.push(portrait);
@@ -102,15 +130,20 @@ function update(elapsed) {
 
     if (controls.ACCEPT) {
         if (inSongSelection) {
-            FlxTransitionableState.skipNextTransIn = true;
-            FlxTransitionableState.skipNextTransOut = true;
+            if (songsUnlocked.contains(songSelectedStr.toLowerCase()) && charactersUnlocked.contains(characters[curSelected].toLowerCase())) {
+                FlxTransitionableState.skipNextTransIn = true;
+                FlxTransitionableState.skipNextTransOut = true;
 
-            FlxG.camera.fade(0xFFffffff, 0.8);
+                FlxG.camera.fade(0xFFffffff, 0.8);
+                FlxG.sound.play(Paths.sound("confirmMenu"));
 
-            new FlxTimer().start(1, function(tmr) {
-                CoolUtil.loadSong(mod, songSelectedStr, "hard");
-                LoadingState.loadAndSwitchState(new PlayState());    
-            });
+                new FlxTimer().start(1, function(tmr) {
+                    CoolUtil.loadSong(mod, songSelectedStr, "hard");
+                    LoadingState.loadAndSwitchState(new PlayState());    
+                });
+            } else {
+                FlxG.sound.play(Paths.sound("deniedMOMENT"));
+            }
         } else {
             changeSongSelection(0);
             inSongSelection = true;
@@ -129,6 +162,9 @@ function update(elapsed) {
 }
 
 function changeSelection(amt) {
+    if (amt != 0)
+        FlxG.sound.play(Paths.sound("scrollMenu"));
+
     curSelected += amt;
 
     if (curSelected > songsLength)
@@ -150,7 +186,7 @@ function changeSelection(amt) {
             char.alpha = 1;
     }
 
-    charText.text = characters[curSelected].toUpperCase();
+    charText.text = if (charactersUnlocked.contains(characters[curSelected].toLowerCase())) characters[curSelected].toUpperCase() else "???";
 
     for (i in 0...songs.get(characters[curSelected]).length + 1) {
         for (song in songsTexts) {
@@ -164,7 +200,7 @@ function changeSelection(amt) {
     for (song in songs.get(characters[curSelected])) {
         songIndex++;
 
-        var text = new FlxText(350, (songIndex * 65) + 330, FlxG.width, StringTools.replace(song, "-", " "), 45);
+        var text = new FlxText(350, (songIndex * 65) + 330, FlxG.width, if (songsUnlocked.contains(song.toLowerCase())) StringTools.replace(song, "-", " ") else "???", 45);
         text.scrollFactor.set();
         text.alignment = "center";
         songsTexts.push(text);
@@ -174,6 +210,9 @@ function changeSelection(amt) {
 
 function changeSongSelection(amt) {
     destroyTween();
+
+    if (amt != 0)
+        FlxG.sound.play(Paths.sound("scrollMenu"));
 
     songSelected += amt;
 
