@@ -77,10 +77,10 @@ function changeSelection(amt) {
 
     curSelected += amt;
 
-    if (curSelected > FlxG.save.data.storyProgress)
-        curSelected = 0;
-    if (curSelected < 0)
-        curSelected = FlxG.save.data.storyProgress;
+    // if (curSelected > FlxG.save.data.storyProgress)
+    //     curSelected = 0;
+    // if (curSelected < 0)
+    //     curSelected = FlxG.save.data.storyProgress;
 
     songPortrait.loadGraphic(Paths.image("menus/freeplay/fpstuff/" + songs[curSelected]));
     songPortrait.setGraphicSize(songPortrait.width * 0.27);
@@ -90,6 +90,6 @@ function changeSelection(amt) {
 
     staticLmao.alpha = 1;
 
-    if (FlxG.save.data.storyProgress != 0)
-        staticTween = FlxTween.tween(staticLmao, {alpha: 0.35}, 0.75);
+    // if (FlxG.save.data.storyProgress != 0)
+    staticTween = FlxTween.tween(staticLmao, {alpha: 0.35}, 0.75);
 }

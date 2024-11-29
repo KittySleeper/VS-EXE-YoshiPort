@@ -11,15 +11,16 @@ var songSelected = 0;
 var songsLength = 0;
 var songSelectedStr = "Too-Slow";
 
-var characters = ["curse", "fatalerror", "b4cksl4sh", "starved", "coldsteel"];
-var charactersUnlocked = ["curse", "fatalerror", "b4cksl4sh", "starved"];
-var songsUnlocked = ["malediction", "fatality", "b4cksl4sh", "prey", "fight-or-flight"];
+var characters = ["curse", "fatalerror", "b4cksl4sh", "starved", "coldsteel", "leaker"];
+var charactersUnlocked = ["curse", "fatalerror", "b4cksl4sh", "starved", "leaker"];
+var songsUnlocked = ["malediction", "fatality", "b4cksl4sh", "prey", "fight-or-flight", "traitor"];
 var songs = [
     "curse" => ["Malediction", "Test"],
     "fatalerror" => ["Fatality"],
     "b4cksl4sh" => ["B4cksl4sh"],
     "starved" => ["Prey", "Fight-Or-Flight"],
-    "coldsteel" => ["Personel"]
+    "coldsteel" => ["Personel"],
+    "leaker" => ["Traitor"]
 ];
 
 var charText;

@@ -1,0 +1,12 @@
+{
+  "song": {
+    "song": "Traitor",
+    "bpm": 126,
+    "needsVoices": true,
+    "player1": "traitorXeno",
+    "player2": "dad",
+    "speed": 2.85,
+    "notes": []
+  },
+  "generatedBy": "SNIFF ver.6"
+}
