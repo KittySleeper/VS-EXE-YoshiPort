@@ -38,16 +38,14 @@ function create() {
 	timeBar.cameras = [pauseCam];
 	insert(2, timeBar);
 
-	var icon = FlxG.state.iconP1.clone();
-	icon.flipX = true;
+	var icon = FlxG.state.iconP2.clone();
 	icon.x -= 500;
 	icon.y = 130;
 	FlxTween.tween(icon, {x: 90}, 0.2, {ease: FlxEase.quadOut});
 	icon.cameras = [pauseCam];
 	add(icon);
 
-	var icon2 = FlxG.state.iconP2.clone();
-	icon2.flipX = true;
+	var icon2 = FlxG.state.iconP1.clone();
 	icon2.x += 1000;
 	icon2.y = 130;
 	FlxTween.tween(icon2, {x: 500}, 0.2, {ease: FlxEase.quadOut});
