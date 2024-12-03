@@ -1,2 +1,7 @@
+# VS Sonic.EXE 2.5 Ported to Yoshi Crafter Engine 
+## Credits:
+[Nova Ashwolf](https://github.com/NovaAshwolfDev]
+[KittySleeper](https://github.com/KittySleeper]
+
 > [!NOTE]
-> Useful information that users should know, even when skimming content.
+> Nova was here and did this :33
