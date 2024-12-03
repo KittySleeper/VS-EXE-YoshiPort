@@ -1,2 +1,2 @@
 > [!NOTE]
-> Nova was here
+> Useful information that users should know, even when skimming content.
