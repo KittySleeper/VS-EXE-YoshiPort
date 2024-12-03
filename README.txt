@@ -1,2 +1,2 @@
-> [!ERROR]
+> [!NOTE]
 > Nova was here
